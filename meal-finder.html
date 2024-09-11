@@ -20,8 +20,8 @@
           </button>
           <div id="navbarSupportedContent" class="collapse navbar-collapse">
             <ul>
-                <li id="close-btn" style="position: absolute; top: 10px; right: 10px; font-size: 20px; color: rgb(9, 8, 8); cursor: pointer;"><i class="fa-solid fa-xmark"></i></li>
-                <li id="category-list" style="background-color: white;"></li>
+                <li id="close-btn"><i class="fa-solid fa-xmark"></i></li>
+                <li id="category-list"></li>
             </ul>
           </div>
         </div>
@@ -35,27 +35,49 @@
             PERSONALIZE YOUR EXPERIENCE
         </p>
       </div>
-      <script>
-        fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
-           .then(res => res.json())
-           .then(data => {
-             let html = '';
-             data.categories.forEach(category => {
-               html += `
-                 <li style="background-color: white;">
-                   <a href="#" style="color: black;">${category.strCategory}</a>
-                 </li>
-               `;
-             });
-             document.getElementById('category-list').innerHTML = html;
-           });
-         document.getElementById('menu-btn').addEventListener('click', function() {
-           document.getElementById('navbarSupportedContent').classList.toggle('show');
-         });
-       
-           document.getElementById('close-btn').addEventListener('click', function() {
-           document.getElementById('navbarSupportedContent').classList.remove('show');
-         });
-       </script>
+      <div id="categories"></div>
+      <div id="meal-list"></div>
+
+<script>
+ fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
+    .then(res => res.json())
+    .then(data => {
+      let html = '';
+      let categories = '<h2>CATEGORIES</h2>';
+      data.categories.forEach(category => {
+        html += `
+          <li style="background-color: white;">
+    <a href="#" style="color: black;" onclick="getMeals('${category.strCategory}')">${category.strCategory}</a>
+  </li>
+        `;
+        categories += ` <img src="${category.strCategoryThumb}" alt="${category.strCategory}"> `;
+      });
+      document.getElementById('category-list').innerHTML = html;
+      document.getElementById('categories').innerHTML = categories;
+    });
+  document.getElementById('menu-btn').addEventListener('click', function() {
+    document.getElementById('navbarSupportedContent').classList.toggle('show');
+  });
+
+    document.getElementById('close-btn').addEventListener('click', function() {
+    document.getElementById('navbarSupportedContent').classList.remove('show');
+  });
+  function getMeals(category) {
+  fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`)
+    .then(res => res.json())
+    .then(data => {
+      let mealHtml = '';
+      data.meals.forEach(meal => {
+        mealHtml += `
+          <li>
+            <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
+            <a href="#" style="color: black;">${meal.strMeal}</a>
+          </li>
+        `;
+      });
+      document.getElementById('meal-list').innerHTML = mealHtml;
+    });
+}
+</script>
 </body>
 </html>
