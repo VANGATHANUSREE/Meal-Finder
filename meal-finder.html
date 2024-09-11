@@ -29,32 +29,40 @@
       <div class="background">
         <div class="search-container">
           <input type="text" class="search_bar" placeholder="Search recipes here ..."> 
-          <span><i class="fa-solid fa-magnifying-glass" id="search_icon"></i></span>
+          <span><i class="fa-solid fa-magnifying-glass" id="search_icon" onclick="searchMeals()"></i></span>
         </div>
         <p><span class="text">What are your favorite cuisines?</span></br>
             PERSONALIZE YOUR EXPERIENCE
         </p>
       </div>
-      <div id="categories"></div>
+      <div id="categories">
+        <h2>CATEGORIES</h2>
+        <ul id="category-list"></ul>
+      </div>
       <div id="meal-list"></div>
 
 <script>
- fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
-    .then(res => res.json())
-    .then(data => {
-      let html = '';
-      let categories = '<h2>CATEGORIES</h2>';
-      data.categories.forEach(category => {
-        html += `
-          <li style="background-color: white;">
-    <a href="#" style="color: black;" onclick="getMeals('${category.strCategory}')">${category.strCategory}</a>
-  </li>
-        `;
-        categories += ` <img src="${category.strCategoryThumb}" alt="${category.strCategory}"> `;
-      });
-      document.getElementById('category-list').innerHTML = html;
-      document.getElementById('categories').innerHTML = categories;
+fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
+  .then(res => res.json())
+  .then(data => {
+    let categoriesHtml = '<h2>CATEGORIES</h2>';
+    let html = '';
+    data.categories.forEach(category => {
+      categoriesHtml += `
+        <div style="display: inline-block; margin: 10px;">
+          <img src="${category.strCategoryThumb}" alt="${category.strCategory}">
+          <p style="text-align: center;">${category.strCategory}</p>
+        </div>
+      `;
+      html += `
+        <li style="background-color: white;">
+          <a href="#" style="color: black;" onclick="getMeals('${category.strCategory}')">${category.strCategory}</a>
+        </li>
+      `;
     });
+    document.getElementById('categories').innerHTML = categoriesHtml;
+    document.getElementById('category-list').innerHTML = html;
+  });
   document.getElementById('menu-btn').addEventListener('click', function() {
     document.getElementById('navbarSupportedContent').classList.toggle('show');
   });
@@ -78,6 +86,29 @@
       document.getElementById('meal-list').innerHTML = mealHtml;
     });
 }
+function searchMeals() {
+    const searchQuery = document.querySelector('.search_bar').value.trim();
+    if (searchQuery) {
+      fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchQuery}`)
+        .then(res => res.json())
+        .then(data => {
+          let mealHtml = '';
+          if (data.meals) {
+            data.meals.forEach(meal => {
+              mealHtml += `
+                <li>
+                  <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
+                  <a href="#" style="color: black;">${meal.strMeal}</a>
+                </li>
+              `;
+            });
+          } else {
+            mealHtml = `<p style="color: red; font-weight: bolder; font-size: 50px">No Meals Found!</p>`;
+          }
+          document.getElementById('meal-list').innerHTML = mealHtml;
+        });
+    }
+  }
 </script>
 </body>
 </html>
