@@ -3,13 +3,19 @@
     display: flex;
     justify-content: space-between;
     color: white;
+    position: fixed;
+    width: 100%;
+    top: 0%;
+    z-index: 1030;
+    font-weight: bolder;
+    font-style: italic;
 }
 .background{
     display: flex;
     flex-direction: column;  
     align-items: center;
     justify-content: center;
-    height: 200px;
+    height: 300px;
     width: 100%;
     background-image: url("Bgimage.jpg");
     background-size: cover;
@@ -45,7 +51,7 @@
     padding: 10px;
     position: absolute;
     top: 50px;
-    right: 0; 
+    right: 30px;
     width: 200px;
     display: none;
 }
@@ -83,24 +89,25 @@ display: block;
 }
 #categories {
 padding: 20px;
-text-align: start; /* center the categories */
+text-align: start; 
 }
 
 #categories h2 {
 text-decoration: underline;
-text-decoration-color: orange; /* underline with orange color */
+text-decoration-color: orange; 
 }
 
 #categories img {
 background-color:ghostwhite;
 display: inline-block;
-margin: 10px;
-padding-left: 25px;
-transition: transform 0.2s ease; /* add transition effect for zooming */
+display: flex;
+justify-content: space-around;
+margin: 12px;
+transition: transform 0.2s ease; 
 }
 
 #categories img:hover {
-transform: scale(1.2); /* zoom in on hover */
+transform: scale(1.2); 
 }
 
 #category-list li {
@@ -116,4 +123,12 @@ color: black;
 #category-list a:hover {
 color: #ccc;
 font-weight: bolder;
+}
+.image-label {
+position: absolute;
+top: 0;
+right: 0;
+background-color: white;
+padding: 2px;
+font-size: 12px;
 }
