@@ -103,18 +103,31 @@ fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchQuery}`)
 }
 // adding the functionality to the images that displayed in the categories section when clicked on the image the corresponding items of the category 
 function getMealsByCategory(category) {
-fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`)
-.then(res => res.json())
-.then(data => {
-  let mealHtml = '';
-  data.meals.forEach(meal => {
-    mealHtml += `
-      <li>
-        <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
-        <a href="#" style="color: black;">${meal.strMeal}</a>
-      </li>
-    `;
-  });
-  document.getElementById('meal-list').innerHTML = mealHtml;
-})
+  // Fetch category description
+  fetch(`https://www.themealdb.com/api/json/v1/1/categories.php`)
+    .then(res => res.json())
+    .then(data => {
+      const categoryDescription = data.categories.find(cat => cat.strCategory === category).strCategoryDescription;
+      
+      // Fetch meals
+      fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`)
+        .then(res => res.json())
+        .then(data => {
+          let mealHtml = '';
+          mealHtml += `
+                        <p style="border:2px solid orange; margin:50px; padding:5px">${categoryDescription}</p>
+                        <h2 style= "text-decoration-color:orange; border-bottom:5px solid orange; padding-bottom:5px;  width: 100px; display: inline-block;">Meals</h2>
+                        <div class="category-images">`; // added container div
+          data.meals.forEach(meal => {
+            mealHtml += `
+              <div>
+                <img src="${meal.strMealThumb}" alt="${meal.strMeal}" onclick="getMealDetails('${meal.idMeal}')">
+                <p><a href="#" style="color: black; text">${meal.strMeal}</a></p>
+              </div>
+            `;
+          });
+          mealHtml += `</div>`; // closing container div
+          document.getElementById('category-description').innerHTML = mealHtml;
+        });
+    });
 }
