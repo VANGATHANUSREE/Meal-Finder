@@ -55,10 +55,10 @@ fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
   data.categories.forEach(category => {
 // fetching the images to display in category section
 categoriesHtml += `
-  <div style="position: relative; display: inline-block; margin: 10px;">
-    <img src="${category.strCategoryThumb}" alt="${category.strCategory}" onclick="getMealsByCategory('${category.strCategory}')">
-    <div style="position: absolute; top: 5px; right: 5px; background-color: orange; color: white; padding: 2px 5px; font-size: 12px;font-weight:bolder; border-radius: 15px;">${category.strCategory}</div>
-  </div>
+<div style="position: relative; display: inline-block; margin: 10px;">
+  <img src="${category.strCategoryThumb}" alt="${category.strCategory}" onclick="getMealsByCategory('${category.strCategory}')">
+  <div style="position: absolute; top: 5px; right: 5px; background-color: orange; color: white; padding: 2px 5px; font-size: 12px;font-weight:bolder; border-radius: 15px;">${category.strCategory}</div>
+</div>
 `;
 // fetching the category names to display in toogle menu
     html += `
@@ -188,23 +188,23 @@ fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`)
     let mealDetailsHtml = `
       <div class="meal-info-container">
         <div class="meal-info">
-          <h2 style="color: white; background-color:orange"><i class="fa-solid fa-house-chimney" style=padding:5px;></i>${meal.strMeal}</h2>
+          <h2 style="color: white; background-color:orange"><i class="fa-solid fa-house-chimney" style=padding:5px;></i><i class="fa-solid fa-angles-right"></i>${meal.strMeal}</h2>
           <div class="image-category-container">
             <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
             <div class="info-container" style="display: inline-block; vertical-align: top;">
               <div class="category-source-tags" style="background-color:ghostwhite; padding: 10px;">
                 <h3 style=color:orange;>${meal.strMeal} <hr></h3>
-                <p>Category: ${meal.strCategory}</p>
-                <p>Source: ${meal.strSource}</p>
+                <p><b>Category:</b> ${meal.strCategory}</p>
+                <p><b>Source:</b> ${meal.strSource}</p>
                ${tags.length > 0 ? `
-                <p>Tags: ${tags.map(tag => `<span class="tag">${tag}</span>`).join(' ')}</p>
+                <p><b>Tags:</b> ${tags.map(tag => `<span class="tag">${tag}</span>`).join(' ')}</p>
                   ` : ''}
-                 <div class="ingredients" style="background-color: orange; padding: 10px;">
-            <h3>Ingredients:</h3>
-            <ol class="ingredients">
-              ${ingredients.map((ingredient) => `<li>${ingredient}</li>`).join('')}
-            </ol>
-          </div>
+               <div class="ingredients" style="background-color: orange; padding: 10px; color:white;">
+<h3>Ingredients:</h3>
+<ol class="ingredients">
+  ${ingredients.map((ingredient) => `<li>${ingredient}</li>`).join('')}
+</ol>
+</div>
               </div>
             </div>
           </div>
@@ -215,10 +215,10 @@ fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`)
             </div>
           </div>
         </div>
-        <div class="meal-description">
-          <h3>Instructions:</h3>
-          <p>${meal.strInstructions.split('.').map((instruction, index, array) => `${index < array.length - 1 ? '✔ ' : ''}${instruction.trim()}`).join('<br>')}</p>
-        </div>
+       <div class="meal-description">
+<h3>Instructions:</h3>
+<p>${meal.strInstructions.split('.').map((instruction, index, array) => `${index < array.length - 1 ? '<i class="fas fa-check" style="color: orange; border: 2px solid orange;  padding: 2px; margin:2px;"></i> ' : ''}${instruction.trim()}`).join('<br>')}</p>
+</div>
       </div>
     `;
     document.getElementById('category-description').innerHTML = mealDetailsHtml;

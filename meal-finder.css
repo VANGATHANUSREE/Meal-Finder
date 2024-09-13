@@ -232,3 +232,23 @@ column-count: 2;
 .measurements p {
 margin-bottom: 10px; 
 }
+.ingredients ol {
+counter-reset: li;
+list-style: none;
+}
+
+.ingredients ol li {
+counter-increment: li;
+}
+
+.ingredients ol li::before {
+content: counter(li);
+border: 1px solid white;
+padding: 2px 4px;
+border-radius: 50%;
+display: inline-block;
+width: 30px;
+text-align: center;
+margin: 3px;
+background-color: rgb(61, 145, 255);
+}
