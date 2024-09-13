@@ -54,12 +54,12 @@ fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
   let html = '';
   data.categories.forEach(category => {
 // fetching the images to display in category section
-    categoriesHtml += `
-      <div style="display: inline-block; margin: 10px;">
-        <img src="${category.strCategoryThumb}" alt="${category.strCategory}" onclick="getMealsByCategory('${category.strCategory}')">
-        <span class="label">${category.strCategory}</span>
-      </div>
-    `;
+categoriesHtml += `
+  <div style="position: relative; display: inline-block; margin: 10px;">
+    <img src="${category.strCategoryThumb}" alt="${category.strCategory}" onclick="getMealsByCategory('${category.strCategory}')">
+    <div style="position: absolute; top: 5px; right: 5px; background-color: orange; color: white; padding: 2px 5px; font-size: 12px;font-weight:bolder; border-radius: 15px;">${category.strCategory}</div>
+  </div>
+`;
 // fetching the category names to display in toogle menu
     html += `
       <li style="background-color: white;">
