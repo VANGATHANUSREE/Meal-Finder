@@ -1,5 +1,5 @@
 .navbar{
-    background-color: #f87902;
+    background-color: orange;
     display: flex;
     justify-content: space-between;
     color: white;
@@ -30,7 +30,7 @@
     border: 2px solid white ;
     border-radius: 50px;
     padding: 8px;
-    background-color:#f87902;
+    background-color: orange;
     color: white; 
 }
 .background p{
@@ -43,15 +43,15 @@
 }
 #search_icon:hover{
     background-color: white;
-    color: #f87902;
+    color: chocolate
 }
 #navbarSupportedContent{
     background-color: white;
     padding: 10px;
     position: absolute;
     top: 50px;
-    right:0px;
-    width: 300px;
+    right: 30px;
+    width: 200px;
     display: none;
 }
 #navbarSupportedContent ul{
@@ -77,9 +77,12 @@
     font-weight: bolder;
 }
 #close-btn{
-    font-size: 16px;
-    color: #f87902;
-  }
+  padding-left: 170px;
+  font-size: 20px;
+  color: rgb(9, 8, 8);
+  cursor: pointer;
+  background-color: white;
+}
 #navbarSupportedContent.show {
 display: block;
 }
@@ -91,7 +94,7 @@ margin-bottom: 30px;
 font-weight: bold;
 font-size: 18px;
 margin-bottom: 10px;
-border: 2px solid #f87902;
+border: 2px solid orange;
 padding: 5px;
 }
 .category-images {
@@ -100,11 +103,13 @@ grid-template-columns: repeat(5, 3fr);
 gap: 5px;
 margin-top: 30px;
 }
+
 .category-images div {
 display: flex;
 flex-direction: column;
 align-items: center;
 }
+
 .category-images img {
 width: 350px;
 height: 200px;
@@ -112,22 +117,26 @@ object-fit: cover;
 border-radius: 10px;
 cursor: pointer;
 }
+
 .category-images p {
 font-weight: bold;
 font-size: 18px;
 margin-top: 10px;
 text-align:start;
 }
+
 #categories {
 padding: 20px;
 text-align: start; 
 }
+
 #categories h2 {
 padding-bottom: 5px;
-border-bottom: 5px solid#f87902;
-text-decoration-color:#f87902;
+border-bottom: 5px solid orange;
+text-decoration-color: orange; 
 width: 200px;
 }
+
 #categories img {
 background-color:ghostwhite;
 display: inline-block;
@@ -136,17 +145,21 @@ justify-content: space-around;
 margin: 12px;
 transition: transform 0.2s ease; 
 }
+
 #categories img:hover {
 transform: scale(1.2); 
 }
+
 #category-list li {
 display: inline-block;
 margin: 10px;
 }
+
 #category-list a {
 text-decoration: none;
 color: black;
 }
+
 #category-list a:hover {
 color: #fcfbfb;
 font-weight: bolder;
@@ -155,51 +168,61 @@ font-weight: bolder;
 float: left;
 width: 100%;
 }
+
 .meal-description {
 margin-top: 20px;
 clear: both;
 }
+
 .meal-details {
 float: left;
 width: 25%;
 margin-left: 5%;
 }
+
 .meal-details img {
 width: 200px;
 height: 200px;
 margin: 20px;
 border-radius: 10px;
 }
+
 .meal-info {
 flex: 1;
 margin: 20px;
 }
+
 .ingredients {
 margin-top: 20px;
 }
+
 .ingredients ol {
 display: grid;
 grid-template-columns: repeat(3, 1fr);
 gap: 20px;
 justify-content: space-between;
 }
+
 .ingredients li {
 margin-bottom: 10px;
 }
+
 .tag {
-border: 1px solid #f87902;
+border: 1px solid orange;
 padding: 5px;
 margin: 5px;
 border-radius: 5px;
 background-color: #f0f0f0;
 }
+
 .tags ul li {
-border: 1px solid #f87902;
+border: 1px solid orange;
 padding: 5px;
 margin-bottom: 10 px;
 border-radius: 5px;
 background-color: #f0f0f0;
 }
+
 .tags li {
 margin-bottom: 10px;
 }
@@ -213,9 +236,11 @@ margin-bottom: 10px;
 counter-reset: li;
 list-style: none;
 }
+
 .ingredients ol li {
 counter-increment: li;
 }
+
 .ingredients ol li::before {
 content: counter(li);
 border: 1px solid white;
