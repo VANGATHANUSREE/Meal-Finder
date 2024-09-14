@@ -20,7 +20,7 @@
             </button>
             <div id="navbarSupportedContent" class="collapse navbar-collapse">
                 <ul>
-                    <li id="close-btn"><i class="fa-solid fa-xmark"></i></li>
+                    <li id="close-btn"><i class="fa-regular fa-circle-xmark" style=" margin-left:250px;font-weight: bolder;font-size:x-large;"></i></li>
                     <li id="category-list"></li>
                 </ul>
             </div>
@@ -80,7 +80,7 @@ categoriesHtml += `
 });
 //  adding functionality to the list items to display the corresponding items of the category when clicked 
 function getMeals(category) {
-  // Fetch category description from categories.php endpoint
+  // Fetch category description 
   fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
       .then(res => res.json())
       .then(data => {
@@ -92,7 +92,7 @@ function getMeals(category) {
                   <h2 style="text-decoration-color:orange; border-bottom:5px solid orange; padding-bottom:5px;  width: 100px; display: inline-block;"> Meals</h2>
                   <div class="category-images">
               `;
-              // Fetch meal list from filter.php endpoint
+              // Fetching the list of meal items
               fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`)
                   .then(res => res.json())
                   .then(data => {
@@ -110,7 +110,7 @@ function getMeals(category) {
           }
       });
 }
-
+//adding functionality to search bar
 function searchMeals() {
 const searchQuery = document.querySelector('.search_bar').value.trim();
 if (searchQuery) {
@@ -118,20 +118,20 @@ if (searchQuery) {
     .then(res => res.json())
     .then(data => {
       let mealHtml = '';
-      if (data.meals) {
+      if (data.meals) { // executes when search item matches the 
         mealHtml += `<h2 style="text-decoration-color:orange; border-bottom:5px solid orange; padding-bottom:5px;  width: 100px; display: inline-block;">Meals</h2>
-                      <div class="category-images">`; // added Meals heading
+                      <div class="category-images">`; 
         data.meals.forEach(meal => {
           mealHtml += `
             <div>
               <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
-              <p>${meal.strMeal}</p>
+              <p>${meal.strMeal}</p> 
             </div>
           `;
         });
-        mealHtml += `</div>`; // closing container div
-      } else {
-        mealHtml = `<p style="color: red; font-weight: bolder; font-size: 50px">No Meals Found!</p>`;
+        mealHtml += `</div>`; 
+      } else { // executes when the search item does not match the list of items
+        mealHtml = `<p style="color: red; font-weight: bolder; font-size: 50px; text-align: center;">No Meals Found!</p>`;
       }
       document.getElementById('category-description').innerHTML = mealHtml;
     })
@@ -153,7 +153,7 @@ fetch(`https://www.themealdb.com/api/json/v1/1/categories.php`)
         mealHtml += `
                       <p style="border:2px solid orange; margin:50px; padding:5px">${categoryDescription}</p>
                       <h2 style= "text-decoration-color:orange; border-bottom:5px solid orange; padding-bottom:5px;  width: 100px; display: inline-block;">Meals</h2>
-                      <div class="category-images">`; // added container div
+                      <div class="category-images">`;
         data.meals.forEach(meal => {
           mealHtml += `
             <div>
@@ -162,7 +162,7 @@ fetch(`https://www.themealdb.com/api/json/v1/1/categories.php`)
             </div>
           `;
         });
-        mealHtml += `</div>`; // closing container div
+        mealHtml += `</div>`; 
         document.getElementById('category-description').innerHTML = mealHtml;
       });
   });
@@ -184,7 +184,7 @@ fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`)
         }
       }
     }
-    const tags = meal.strTags ? meal.strTags.split(',') : [];
+    const tags = meal.strTags ? meal.strTags.split(',') : []; // Creating the separate div sections to display the list of items or content in desired positions
     let mealDetailsHtml = `
       <div class="meal-info-container">
         <div class="meal-info">
@@ -200,31 +200,31 @@ fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`)
                 <p><b>Tags:</b> ${tags.map(tag => `<span class="tag">${tag}</span>`).join(' ')}</p>
                   ` : ''}
                <div class="ingredients" style="background-color: orange; padding: 10px; color:white;">
-<h3>Ingredients:</h3>
-<ol class="ingredients">
-  ${ingredients.map((ingredient) => `<li>${ingredient}</li>`).join('')}
-</ol>
-</div>
-              </div>
+                    <h3>Ingredients:</h3>
+                    <ol class="ingredients">
+                        ${ingredients.map((ingredient) => `<li>${ingredient}</li>`).join('')}
+                    </ol>
+                </div>
             </div>
-          </div>
+            </div>
+        </div>
           <div class="measures" style="background-color:ghostwhite; padding: 10px;">
             <h3>Measures:</h3>
             <div class="measurements">
-              ${measures.map((measure, index) => `<p><i class="fas fa-utensil-spoon"></i> ${measure}</p>`).join('')}
+              ${measures.map((measure, index) => `<p><i class="fas fa-utensil-spoon" style="color: orange;"></i> ${measure}</p>`).join('')}
             </div>
           </div>
         </div>
        <div class="meal-description">
-<h3>Instructions:</h3>
-<p>${meal.strInstructions.split('.').map((instruction, index, array) => `${index < array.length - 1 ? '<i class="fas fa-check" style="color: orange; border: 2px solid orange;  padding: 2px; margin:2px;"></i> ' : ''}${instruction.trim()}`).join('<br>')}</p>
+            <h3>Instructions:</h3> 
+            <p>${meal.strInstructions.split('.').map((instruction, index, array) => `${index < array.length - 1 ? '<i class="fas fa-check" style="color: orange; border: 2px solid orange;  padding: 2px; margin:2px;"></i> ' : ''}${instruction.trim()}`).join('<br>')}</p>
+        </div> 
 </div>
-      </div>
     `;
     document.getElementById('category-description').innerHTML = mealDetailsHtml;
   });
 }
-function displayMealDetailsOnImageClick(event) {
+function displayMealDetailsOnImageClick(event) { // added to fetch the details of particular item when clicked on the image of that item
 const idMeal = event.target.dataset.idmeal;
 getMealDetails(idMeal);
 }
