@@ -1,5 +1,5 @@
 .navbar{
-    background-color: orange;
+    background-color: #f87902;
     display: flex;
     justify-content: space-between;
     color: white;
@@ -30,7 +30,7 @@
     border: 2px solid white ;
     border-radius: 50px;
     padding: 8px;
-    background-color: orange;
+    background-color:#f87902;
     color: white; 
 }
 .background p{
@@ -43,7 +43,7 @@
 }
 #search_icon:hover{
     background-color: white;
-    color: chocolate
+    color: #f87902;
 }
 #navbarSupportedContent{
     background-color: white;
@@ -78,7 +78,7 @@
 }
 #close-btn{
     font-size: 16px;
-    color: orange;
+    color: #f87902;
   }
 #navbarSupportedContent.show {
 display: block;
@@ -91,7 +91,7 @@ margin-bottom: 30px;
 font-weight: bold;
 font-size: 18px;
 margin-bottom: 10px;
-border: 2px solid orange;
+border: 2px solid #f87902;
 padding: 5px;
 }
 .category-images {
@@ -124,8 +124,8 @@ text-align: start;
 }
 #categories h2 {
 padding-bottom: 5px;
-border-bottom: 5px solid orange;
-text-decoration-color: orange; 
+border-bottom: 5px solid#f87902;
+text-decoration-color:#f87902;
 width: 200px;
 }
 #categories img {
@@ -187,14 +187,14 @@ justify-content: space-between;
 margin-bottom: 10px;
 }
 .tag {
-border: 1px solid orange;
+border: 1px solid #f87902;
 padding: 5px;
 margin: 5px;
 border-radius: 5px;
 background-color: #f0f0f0;
 }
 .tags ul li {
-border: 1px solid orange;
+border: 1px solid #f87902;
 padding: 5px;
 margin-bottom: 10 px;
 border-radius: 5px;

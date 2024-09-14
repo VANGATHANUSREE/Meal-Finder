@@ -40,7 +40,6 @@
     <div id="categories">
         <h2>CATEGORIES</h2>
     </div>
-    
 <script>
 document.querySelector('.navbar-brand').addEventListener('click', function() {
 window.location.reload();
@@ -57,7 +56,7 @@ fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
 categoriesHtml += `
 <div style="position: relative; display: inline-block; margin: 10px;">
   <img src="${category.strCategoryThumb}" alt="${category.strCategory}" onclick="getMealsByCategory('${category.strCategory}')">
-  <div style="position: absolute; top: 5px; right: 5px; background-color: orange; color: white; padding: 2px 5px; font-size: 12px;font-weight:bolder; border-radius: 15px;">${category.strCategory}</div>
+  <div style="position: absolute; top: 5px; right: 5px; background-color: #f87902; color: white; padding: 2px 5px; font-size: 12px;font-weight:bolder; border-radius: 15px;">${category.strCategory}</div>
 </div>
 `;
 // fetching the category names to display in toogle menu
@@ -89,7 +88,7 @@ function getMeals(category) {
               const description = categoryData.strCategoryDescription;
               let categoryDescriptionHtml = `
                   <div class="category-description-text">${description}</div>
-                  <h2 style="text-decoration-color:orange; border-bottom:5px solid orange; padding-bottom:5px;  width: 100px; display: inline-block;"> Meals</h2>
+                  <h2 style="text-decoration-color:#f87902; border-bottom:5px solid #f87902;; padding-bottom:5px;  width: 100px; display: inline-block;"> Meals</h2>
                   <div class="category-images">
               `;
               // Fetching the list of meal items
@@ -119,7 +118,7 @@ if (searchQuery) {
     .then(data => {
       let mealHtml = '';
       if (data.meals) { // executes when search item matches the 
-        mealHtml += `<h2 style="text-decoration-color:orange; border-bottom:5px solid orange; padding-bottom:5px;  width: 100px; display: inline-block;">Meals</h2>
+        mealHtml += `<h2 style="text-decoration-color:#f87902; border-bottom:5px solid orange; padding-bottom:5px;  width: 100px; display: inline-block;">Meals</h2>
                       <div class="category-images">`; 
         data.meals.forEach(meal => {
           mealHtml += `
@@ -144,15 +143,14 @@ fetch(`https://www.themealdb.com/api/json/v1/1/categories.php`)
   .then(res => res.json())
   .then(data => {
     const categoryDescription = data.categories.find(cat => cat.strCategory === category).strCategoryDescription;
-    
     // Fetch meals
     fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`)
       .then(res => res.json())
       .then(data => {
         let mealHtml = '';
         mealHtml += `
-                      <p style="border:2px solid orange; margin:50px; padding:5px">${categoryDescription}</p>
-                      <h2 style= "text-decoration-color:orange; border-bottom:5px solid orange; padding-bottom:5px;  width: 100px; display: inline-block;">Meals</h2>
+                      <p style="border:2px solid #f87902; margin:50px; padding:5px">${categoryDescription}</p>
+                      <h2 style= "text-decoration-color:orange; border-bottom:5px solid #f87902; padding-bottom:5px;  width: 100px; display: inline-block;">Meals</h2>
                       <div class="category-images">`;
         data.meals.forEach(meal => {
           mealHtml += `
@@ -188,7 +186,7 @@ fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`)
     let mealDetailsHtml = `
       <div class="meal-info-container">
         <div class="meal-info">
-          <h2 style="color: white; background-color:orange"><i class="fa-solid fa-house-chimney" style=padding:5px;></i><i class="fa-solid fa-angles-right"></i>${meal.strMeal}</h2>
+          <h2 style="color: white; background-color:#f87902;"><i class="fa-solid fa-house-chimney" style=padding:5px;></i><i class="fa-solid fa-angles-right"></i>${meal.strMeal}</h2>
           <div class="image-category-container">
             <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
             <div class="info-container" style="display: inline-block; vertical-align: top;">
