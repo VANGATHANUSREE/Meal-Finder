@@ -16,11 +16,11 @@
                 <i class="fa-solid fa-utensils"></i> Meal Finder
             </a>
             <button class="navbar-toggler text-white" type="button" id="menu-btn">
-                <span class="navbar-toggler-icon text-white" style="filter:  brightness(0) invert(1);" ></span>
+                <span class="navbar-toggler-icon text-white" style="filter: brightness(0) invert(1);" ></span>
             </button>
             <div id="navbarSupportedContent" class="collapse navbar-collapse">
                 <ul>
-                    <li id="close-btn"><i class="fa-regular fa-circle-xmark" style=" margin-left:250px;font-weight: bolder;font-size:x-large;"></i></li>
+                    <li id="close-btn"><i class="fa-solid fa-circle-xmark"></i></li>
                     <li id="category-list"></li>
                 </ul>
             </div>
@@ -40,6 +40,7 @@
     <div id="categories">
         <h2>CATEGORIES</h2>
     </div>
+    
 <script>
 document.querySelector('.navbar-brand').addEventListener('click', function() {
 window.location.reload();
@@ -56,7 +57,7 @@ fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
 categoriesHtml += `
 <div style="position: relative; display: inline-block; margin: 10px;">
   <img src="${category.strCategoryThumb}" alt="${category.strCategory}" onclick="getMealsByCategory('${category.strCategory}')">
-  <div style="position: absolute; top: 5px; right: 5px; background-color: #f87902; color: white; padding: 2px 5px; font-size: 12px;font-weight:bolder; border-radius: 15px;">${category.strCategory}</div>
+  <div style="position: absolute; top: 5px; right: 5px; background-color: #f87902; color: white; padding: 2px 5px; font-size: 20px;font-weight:bolder; border-radius: 15px;">${category.strCategory}</div>
 </div>
 `;
 // fetching the category names to display in toogle menu
@@ -79,7 +80,7 @@ categoriesHtml += `
 });
 //  adding functionality to the list items to display the corresponding items of the category when clicked 
 function getMeals(category) {
-  // Fetch category description 
+  // Fetch category description from categories.php endpoint
   fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
       .then(res => res.json())
       .then(data => {
@@ -88,10 +89,10 @@ function getMeals(category) {
               const description = categoryData.strCategoryDescription;
               let categoryDescriptionHtml = `
                   <div class="category-description-text">${description}</div>
-                  <h2 style="text-decoration-color:#f87902; border-bottom:5px solid #f87902;; padding-bottom:5px;  width: 100px; display: inline-block;"> Meals</h2>
+                  <h2 style="text-decoration-color:#f87902; border-bottom:5px solid #f87902; padding-bottom:5px;  width: 100px; display: inline-block;"> Meals</h2>
                   <div class="category-images">
               `;
-              // Fetching the list of meal items
+              // Fetch meal list from filter.php endpoint
               fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`)
                   .then(res => res.json())
                   .then(data => {
@@ -109,7 +110,7 @@ function getMeals(category) {
           }
       });
 }
-//adding functionality to search bar
+//adding functionality to the search bar
 function searchMeals() {
 const searchQuery = document.querySelector('.search_bar').value.trim();
 if (searchQuery) {
@@ -117,20 +118,20 @@ if (searchQuery) {
     .then(res => res.json())
     .then(data => {
       let mealHtml = '';
-      if (data.meals) { // executes when search item matches the 
+      if (data.meals) {
         mealHtml += `<h2 style="text-decoration-color:#f87902; border-bottom:5px solid orange; padding-bottom:5px;  width: 100px; display: inline-block;">Meals</h2>
                       <div class="category-images">`; 
         data.meals.forEach(meal => {
           mealHtml += `
             <div>
               <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
-              <p>${meal.strMeal}</p> 
+              <p>${meal.strMeal}</p>
             </div>
           `;
         });
         mealHtml += `</div>`; 
-      } else { // executes when the search item does not match the list of items
-        mealHtml = `<p style="color: red; font-weight: bolder; font-size: 50px; text-align: center;">No Meals Found!</p>`;
+      } else {
+        mealHtml = `<p style="color: red; font-weight: bolder; font-size: 50px">No Meals Found!</p>`;
       }
       document.getElementById('category-description').innerHTML = mealHtml;
     })
@@ -143,6 +144,7 @@ fetch(`https://www.themealdb.com/api/json/v1/1/categories.php`)
   .then(res => res.json())
   .then(data => {
     const categoryDescription = data.categories.find(cat => cat.strCategory === category).strCategoryDescription;
+    
     // Fetch meals
     fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`)
       .then(res => res.json())
@@ -150,8 +152,8 @@ fetch(`https://www.themealdb.com/api/json/v1/1/categories.php`)
         let mealHtml = '';
         mealHtml += `
                       <p style="border:2px solid #f87902; margin:50px; padding:5px">${categoryDescription}</p>
-                      <h2 style= "text-decoration-color:orange; border-bottom:5px solid #f87902; padding-bottom:5px;  width: 100px; display: inline-block;">Meals</h2>
-                      <div class="category-images">`;
+                      <h2 style= "text-decoration-color:#f87902; border-bottom:5px solid #f87902; padding-bottom:5px;  width: 100px; display: inline-block;">Meals</h2>
+                      <div class="category-images">`; 
         data.meals.forEach(meal => {
           mealHtml += `
             <div>
@@ -182,7 +184,7 @@ fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`)
         }
       }
     }
-    const tags = meal.strTags ? meal.strTags.split(',') : []; // Creating the separate div sections to display the list of items or content in desired positions
+    const tags = meal.strTags ? meal.strTags.split(',') : [];
     let mealDetailsHtml = `
       <div class="meal-info-container">
         <div class="meal-info">
@@ -190,39 +192,39 @@ fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`)
           <div class="image-category-container">
             <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
             <div class="info-container" style="display: inline-block; vertical-align: top;">
-              <div class="category-source-tags" style="background-color:ghostwhite; padding: 10px;">
-                <h3 style=color:orange;>${meal.strMeal} <hr></h3>
-                <p><b>Category:</b> ${meal.strCategory}</p>
+              <div class="category-source-tags" style="background-color:ghostwhite; padding: 10px; margin:50px;">
+                <h3 style="color:#f87902;">${meal.strMeal} <hr></h3>
+                <p><b>Category</b>: ${meal.strCategory}</p>
                 <p><b>Source:</b> ${meal.strSource}</p>
                ${tags.length > 0 ? `
                 <p><b>Tags:</b> ${tags.map(tag => `<span class="tag">${tag}</span>`).join(' ')}</p>
                   ` : ''}
-               <div class="ingredients" style="background-color: orange; padding: 10px; color:white;">
-                    <h3>Ingredients:</h3>
-                    <ol class="ingredients">
-                        ${ingredients.map((ingredient) => `<li>${ingredient}</li>`).join('')}
-                    </ol>
-                </div>
+               <div class="ingredients" style="background-color: #f87902; padding: 10px; color:white; margin:50px">
+<h3>Ingredients:</h3>
+<ol class="ingredients">
+  ${ingredients.map((ingredient) => `<li>${ingredient}</li>`).join('')}
+</ol>
+</div>
+              </div>
             </div>
-            </div>
-        </div>
+          </div>
           <div class="measures" style="background-color:ghostwhite; padding: 10px;">
-            <h3>Measures:</h3>
+            <h3 style="margin-bottom:10px;">Measures:</h3>
             <div class="measurements">
-              ${measures.map((measure, index) => `<p><i class="fas fa-utensil-spoon" style="color: orange;"></i> ${measure}</p>`).join('')}
+              ${measures.map((measure, index) => `<p><i class="fas fa-utensil-spoon"></i> ${measure}</p>`).join('')}
             </div>
           </div>
         </div>
        <div class="meal-description">
-            <h3>Instructions:</h3> 
-            <p>${meal.strInstructions.split('.').map((instruction, index, array) => `${index < array.length - 1 ? '<i class="fas fa-check" style="color: orange; border: 2px solid orange;  padding: 2px; margin:2px;"></i> ' : ''}${instruction.trim()}`).join('<br>')}</p>
-        </div> 
+<h3>Instructions:</h3>
+<p>${meal.strInstructions.split('.').map((instruction, index, array) => `${index < array.length - 1 ? '<i class="fas fa-check" style="color: #f87902; border: 2px solid #f87902;  padding: 2px; margin:2px;"></i> ' : ''}${instruction.trim()}`).join('<br>')}</p>
 </div>
+      </div>
     `;
     document.getElementById('category-description').innerHTML = mealDetailsHtml;
   });
 }
-function displayMealDetailsOnImageClick(event) { // added to fetch the details of particular item when clicked on the image of that item
+function displayMealDetailsOnImageClick(event) {
 const idMeal = event.target.dataset.idmeal;
 getMealDetails(idMeal);
 }
